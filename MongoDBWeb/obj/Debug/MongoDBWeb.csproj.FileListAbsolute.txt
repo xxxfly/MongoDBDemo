@@ -1,0 +1,6 @@
+E:\work\zx_personal\MongoDBWeb\MongoDBWeb\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\work\zx_personal\MongoDBWeb\MongoDBWeb\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\work\zx_personal\MongoDBWeb\MongoDBWeb\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\work\zx_personal\MongoDBWeb\MongoDBWeb\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\work\zx_personal\MongoDBWeb\MongoDBWeb\bin\roslyn\System.IO.Compression.dll
+E:\work\zx_personal\MongoDBWeb\MongoDBWeb\bin\roslyn\VBCSCompiler.exe
