@@ -68,6 +68,9 @@
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="IBaseDAL.cs" />
+    <Compile Include="MongoDBConnect.cs" />
+    <Compile Include="MongoDbFieldAttribute.cs" />
+    <Compile Include="MongoDbHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
