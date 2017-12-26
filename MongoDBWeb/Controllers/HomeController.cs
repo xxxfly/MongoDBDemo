@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using System.Configuration;
+using System.Text;
 
 namespace MongoDBWeb.Controllers
 {
@@ -57,6 +58,72 @@ namespace MongoDBWeb.Controllers
             foreach (BsonDocument item in Cursor)
             {
                 var ssssss = item.ToJson();
+            }
+        }
+
+        public string TestUncodingString(string str)
+        {
+            str = "&#x6D4B;&#x8BD5;";
+            string s = get_utf8(str);
+            return s;
+
+        }
+
+        /// <summary>
+        /// utf-8编码转字符串
+        /// </summary>
+        /// <param name="unicodeStr"></param>
+        /// <returns></returns>
+        public static string get_utf8(string unicodeStr)
+        {
+            UTF8Encoding utf8 = new UTF8Encoding();
+            Byte[] encodedBytes = utf8.GetBytes(unicodeStr);
+            string decodedString = utf8.GetString(encodedBytes);
+            return decodedString;
+        }
+
+
+        static string AddJson()
+        {
+            var id = Guid.NewGuid().ToString();
+            JObject obj = new JObject();
+            obj["name"] = "test2";
+            obj["age"] = 23;
+            obj["sex"] = "0";
+            obj["CreateTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+
+            BsonDocument document = BsonDocument.Parse(JsonConvert.SerializeObject(obj));
+            new MongoDbService().Add("db1", "colTest2", document);
+            return "";
+        }
+
+        static string AddJsonList()
+        {
+            List<BsonDocument> list = new List<BsonDocument>();
+            for (int i = 0; i < 100000; i++)
+            {
+                JObject obj = new JObject();
+                obj["name"] = "test" + (i + 10);
+                obj["age"] = 20 + i;
+                obj["sex"] = "0";
+                obj["CreateTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                BsonDocument document = BsonDocument.Parse(JsonConvert.SerializeObject(obj));
+                list.Add(document);
+            }
+
+            new MongoDbService().BatchAdd("db1", "colTest2", list);
+
+            return "";
+        }
+
+        static void GetOne()
+        {
+
+            var s1 = new MongoDbService().List<BsonDocument>("db1", "colTest2", m => true, m => m, 100000);
+
+            foreach (BsonDocument item in s1)
+            {
+
             }
         }
     }

@@ -35,7 +35,7 @@ namespace MongoDBDAL
             this._db = db;
         }
 
-      
+
 
         #region 插入数据
         /// <summary>  
@@ -121,9 +121,16 @@ namespace MongoDBDAL
 
         #region 查询数据
 
-        #region 查询所有记录
-     
-        #endregion
+        public void FindOne(string id, string collectionName)
+        {
+            if (this._db == null)
+            {
+                return;
+            }
+            IMongoCollection<BsonDocument> mc = this._db.GetCollection<BsonDocument>(collectionName);
+
+
+        }
 
         #endregion
 
