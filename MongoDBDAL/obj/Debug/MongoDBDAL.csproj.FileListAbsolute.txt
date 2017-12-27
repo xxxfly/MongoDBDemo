@@ -34,3 +34,4 @@ E:\work\zx_personal\MongoDBDemo\MongoDBDAL\obj\Debug\MongoDBDAL.csprojResolveAss
 E:\work\zx_personal\MongoDBDemo\MongoDBDAL\obj\Debug\MongoDBDAL.csproj.CoreCompileInputs.cache
 E:\work\zx_personal\MongoDBDemo\MongoDBDAL\obj\Debug\MongoDBDAL.dll
 E:\work\zx_personal\MongoDBDemo\MongoDBDAL\obj\Debug\MongoDBDAL.pdb
+E:\work\zx_personal\MongoDBDemo\MongoDBDAL\bin\Debug\Framework.dll

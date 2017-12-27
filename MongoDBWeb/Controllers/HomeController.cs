@@ -7,6 +7,9 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using System.Configuration;
 using System.Text;
+using Newtonsoft.Json.Linq;
+using MongoDBDAL;
+using Newtonsoft.Json;
 
 namespace MongoDBWeb.Controllers
 {
@@ -69,6 +72,29 @@ namespace MongoDBWeb.Controllers
 
         }
 
+        public string TestMongoDBMethod(string method)
+        {
+            if (method == "AddJson")
+            {
+                AddJson();
+            }
+            if (method == "AddJsonList")
+            {
+
+            }
+            if (method == "UpdateOne")
+            {
+                UpdateOne();
+            }
+            if (method== "DeleteOne")
+            {
+                DeleteOne();
+            }
+
+            return "test";
+
+        }
+
         /// <summary>
         /// utf-8编码转字符串
         /// </summary>
@@ -87,13 +113,21 @@ namespace MongoDBWeb.Controllers
         {
             var id = Guid.NewGuid().ToString();
             JObject obj = new JObject();
-            obj["name"] = "test2";
+            obj["name"] = "test4";
             obj["age"] = 23;
             obj["sex"] = "0";
-            obj["CreateTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
-
+            obj["CreateTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             BsonDocument document = BsonDocument.Parse(JsonConvert.SerializeObject(obj));
-            new MongoDbService().Add("db1", "colTest2", document);
+
+            if (document["CreateTime"].AsString != null)
+            {
+                string time = document["CreateTime"].AsString;
+                document.Set(document.IndexOfName("CreateTime"), BsonDateTime.Create(DateTime.Parse(time)));
+
+            }
+
+
+            //new MongoDbService().Add("db1", "colTest1", document);
             return "";
         }
 
@@ -106,8 +140,14 @@ namespace MongoDBWeb.Controllers
                 obj["name"] = "test" + (i + 10);
                 obj["age"] = 20 + i;
                 obj["sex"] = "0";
-                obj["CreateTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                obj["CreateTime"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 BsonDocument document = BsonDocument.Parse(JsonConvert.SerializeObject(obj));
+                if (document["CreateTime"].AsString != null)
+                {
+                    string time = document["CreateTime"].AsString;
+                    document.Set(document.IndexOfName("CreateTime"), BsonDateTime.Create(DateTime.Parse(time)));
+
+                }
                 list.Add(document);
             }
 
@@ -118,13 +158,27 @@ namespace MongoDBWeb.Controllers
 
         static void GetOne()
         {
-
-            var s1 = new MongoDbService().List<BsonDocument>("db1", "colTest2", m => true, m => m, 100000);
+            var s1 = new MongoDbService().List<BsonDocument>("db1", "colTest2", m => true, m => m, null);
 
             foreach (BsonDocument item in s1)
             {
 
             }
+        }
+
+
+        static void UpdateOne()
+        {
+            
+            var ss = new MongoDbService().Update<BsonDocument>("db1", "colTest1", m => m["CreateTime"].AsString.Contains("2017-12-26"), n => new BsonDocument {
+                    { "CreateTime",BsonDateTime.Create(DateTime.Parse(n["CreateTime"].AsString))}
+                }
+            );
+        }
+
+        static void DeleteOne()
+        {
+            var ss = new MongoDbService().Delete<BsonDocument>("db1", "colTest1", m => m["name"].AsString == "test2");
         }
     }
 }

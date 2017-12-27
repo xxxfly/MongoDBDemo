@@ -120,7 +120,7 @@ namespace MongoDBDAL
         /// <param name="database">库</param>
         /// <param name="collection">集合（表）</param>
         /// <param name="entity">实体(文档)</param>
-        public async Task BatchAddAsync<T>(string database, string collection, List<T> entity) where T : MongoEntity
+        public async Task BatchAddAsync<T>(string database, string collection, List<T> entity) 
         {
             var db = _mongoClient.GetDatabase(database);
             var coll = db.GetCollection<T>(collection);
@@ -154,7 +154,7 @@ namespace MongoDBDAL
         /// <param name="database">库</param>
         /// <param name="collection">集合（表）</param>
         /// <param name="entity">实体(文档)</param>
-        public void BatchAdd<T>(string database, string collection, List<T> entity) where T : MongoEntity
+        public void BatchAdd<T>(string database, string collection, List<T> entity) 
         {
             BatchAddAsync(database, collection, entity).Wait();
         }
@@ -220,7 +220,7 @@ namespace MongoDBDAL
         /// <param name="predicate">查询条件</param>
         /// <returns></returns>
         public long Delete<T>(string database, string collection, Expression<Func<T, bool>> predicate)
-           where T : MongoEntity
+           
         {
             return DeleteAsync(database, collection, predicate).Result;
         }
@@ -277,7 +277,6 @@ namespace MongoDBDAL
         /// <param name="predicate">实体</param>
         /// <returns></returns>
         public async Task<long> DeleteAsync<T>(string database, string collection, Expression<Func<T, bool>> predicate)
-            where T : MongoEntity
         {
             var db = _mongoClient.GetDatabase(database);
             var coll = db.GetCollection<T>(collection);
@@ -336,7 +335,7 @@ namespace MongoDBDAL
         /// <param name="predicate">条件</param>
         /// <param name="entity">字段</param>
         /// <returns></returns>
-        public long Update<T>(string database, string collection, Expression<Func<T, bool>> predicate, T entity) where T : MongoEntity
+        public long Update<T>(string database, string collection, Expression<Func<T, bool>> predicate, T entity) 
         {
             return UpdateAsync(database, collection, predicate, entity).Result;
         }
@@ -352,6 +351,7 @@ namespace MongoDBDAL
         /// <returns></returns>
         public long Update<T>(string database, string collection, Expression<Func<T, bool>> predicate, Expression<Func<T, T>> lambda)
         {
+
             return UpdateAsync(database, collection, predicate, lambda).Result;
         }
 
@@ -396,7 +396,7 @@ namespace MongoDBDAL
         /// <param name="entity">实体</param>
         /// <returns></returns>
         public async Task<long> UpdateAsync<T>(string database, string collection,
-           Expression<Func<T, bool>> predicate, T entity) where T : MongoEntity
+           Expression<Func<T, bool>> predicate, T entity) 
         {
             var db = _mongoClient.GetDatabase(database);
             var coll = db.GetCollection<T>(collection);
@@ -481,7 +481,7 @@ namespace MongoDBDAL
         /// <param name="projector">查询字段</param>
         /// <returns></returns>
         public T Get<T>(string database, string collection, Expression<Func<T, bool>> predicate,
-            Expression<Func<T, T>> projector) where T : MongoEntity
+            Expression<Func<T, T>> projector) 
         {
             return GetAsync(database, collection, predicate, projector).Result;
         }
@@ -517,7 +517,7 @@ namespace MongoDBDAL
         /// <param name="projector">查询字段</param>
         /// <returns></returns>
         public async Task<T> GetAsync<T>(string database, string collection,
-            Expression<Func<T, bool>> predicate, Expression<Func<T, T>> projector) where T : MongoEntity
+            Expression<Func<T, bool>> predicate, Expression<Func<T, T>> projector) 
         {
             var db = _mongoClient.GetDatabase(database);
             var coll = db.GetCollection<T>(collection);
@@ -561,7 +561,7 @@ namespace MongoDBDAL
         /// <param name="limit"></param>
         /// <returns></returns>
         public List<T> List<T>(string database, string collection,
-           Expression<Func<T, bool>> predicate, Expression<Func<T, T>> projector, int? limit) where T : MongoEntity
+           Expression<Func<T, bool>> predicate, Expression<Func<T, T>> projector, int? limit)
         {
             return ListAsync(database, collection, predicate, projector, limit).Result;
         }
@@ -597,7 +597,7 @@ namespace MongoDBDAL
         /// <param name="limit"></param>
         /// <returns></returns>
         public async Task<List<T>> ListAsync<T>(string database, string collection,
-           Expression<Func<T, bool>> predicate, Expression<Func<T, T>> projector, int? limit) where T : MongoEntity
+           Expression<Func<T, bool>> predicate, Expression<Func<T, T>> projector, int? limit) 
         {
             var db = _mongoClient.GetDatabase(database);
             var coll = db.GetCollection<T>(collection);

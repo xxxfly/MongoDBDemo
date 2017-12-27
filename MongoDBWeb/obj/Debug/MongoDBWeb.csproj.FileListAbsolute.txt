@@ -117,3 +117,4 @@ E:\work\zx_personal\MongoDBDemo\MongoDBWeb\obj\Debug\MongoDBWeb.csprojResolveAss
 E:\work\zx_personal\MongoDBDemo\MongoDBWeb\obj\Debug\MongoDBWeb.csproj.CoreCompileInputs.cache
 E:\work\zx_personal\MongoDBDemo\MongoDBWeb\obj\Debug\MongoDBWeb.dll
 E:\work\zx_personal\MongoDBDemo\MongoDBWeb\obj\Debug\MongoDBWeb.pdb
+E:\work\zx_personal\MongoDBDemo\MongoDBWeb\bin\Framework.dll
